@@ -7,6 +7,7 @@
 - **Data Processing:** Pandas
 - **Database:** SQLite
 - **Automation:** Python `schedule`
+- **Containerization:** Docker
 
 ## 🚀 진행된 과제 (Task History)
 
@@ -20,3 +21,8 @@
 
 ### Task 3: 파이프라인 자동화 (Automation)
 - `run_scheduler.py`: 파이썬 내장 스케줄러를 도입하여 일정 주기(10초)마다 데이터 생성-정제-적재-분석 파이프라인이 자동으로 실행되는 데몬(Daemon) 프로세스 구축.
+
+### Task 4: 실행 환경 격리 및 컨테이너화 (Containerization)
+- `Dockerfile`: 파이프라인 실행 환경을 OS 및 런타임 수준에서 격리. 파이썬 3.13 베이스 이미지와 프로젝트 기본 패키지 매니저를 활용하여 일관된 빌드 환경 구성.
+- `PYTHONUNBUFFERED=1`: 백그라운드 컨테이너 실행 시 파이썬 로그가 즉시 출력되도록 환경 변수 설정.
+- 효과: 로컬 환경 의존성을 제거하고, 어느 기기에서든 `docker run` 명령어로 동일한 데이터 파이프라인을 구동할 수 있도록 아키텍처 개선.
