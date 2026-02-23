@@ -10,5 +10,7 @@ dependencies = [
     "pandas>=2.3.3",
     "pyarrow>=22.0.0",
     "python-dotenv>=1.2.1",
+    "s3fs",
     "schedule>=1.2.2",
+    "scikit-learn",
 ]

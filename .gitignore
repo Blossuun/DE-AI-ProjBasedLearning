@@ -24,3 +24,6 @@ __pycache__/
 # OS 생성 파일 무시
 .DS_Store
 Thumbs.db
+
+# 모델 결과 무시
+*.pkl
