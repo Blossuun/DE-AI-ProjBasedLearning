@@ -5,6 +5,7 @@ from src.etl.preprocessor import preprocess_data
 from src.database.connector import save_to_db
 from src.analysis.analyzer import analyze_user_behavior
 from src.storage.s3_uploader import upload_to_s3
+from src.model.inference import predict_vip # [추가]
 
 def main():
     db_path = os.path.join("data", "database", "pipeline.db")
@@ -16,10 +17,12 @@ def main():
     print("[Step 2] 데이터 전처리 중...")
     clean_df = preprocess_data(raw_df)
     
-    # [추가] Step 2.5: S3 데이터 레이크 적재
+    # --- [New] Step 2.1: 실시간 AI 추론 ---
+    predict_vip(clean_df)
+    
+    print("[Step 2.5] AWS S3 Data Lake 적재 중...")
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
     parquet_filename = f"user_logs_{current_time}.parquet"
-    print(f"[Step 2.5] AWS S3 Data Lake 적재 중... ({parquet_filename})")
     upload_to_s3(clean_df, parquet_filename)
     
     print("[Step 3] DB 적재 중...")
